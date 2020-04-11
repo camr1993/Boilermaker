@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
+const { db } = require('./db/index.js');
 
 // logging middleware
 app.use(morgan('dev'));
@@ -32,6 +33,13 @@ app.use((err, req, res, next) => {
 
 // listen on a port, sync up you database, and put everything on the port!
 const port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log(`Server is listening on port ${port}`);
-});
+
+// making this a function so we can add async/await for the db connection
+const run = async () => {
+  await db.sync(); // add in {force: true} to clear tables every time
+  app.listen(port, function () {
+    console.log(`Server is listening on port ${port}`);
+  });
+};
+
+run();
