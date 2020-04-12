@@ -1,20 +1,20 @@
-const db = require('./database');
+const db = require('./database.js');
 
-const Users = require('./models/users');
-const Puppies = require('./models/Puppies');
-const Kittens = require('./models/Kittens');
+const User = require('./models/users');
+const Puppy = require('./models/puppies');
+const Kitten = require('./models/kittens');
 
 // defining associations
-Puppies.belongsTo(Users);
-Kittens.belongsTo(Users);
-Users.hasMany(Puppies);
-Users.hasMany(Kittens);
+Puppy.belongsTo(User);
+Kitten.belongsTo(User);
+User.hasMany(Puppy);
+User.hasMany(Kitten);
 
 // exporting db to sync in app.listen
 // exporting to models post-association to use in routes
 module.exports = {
   db,
-  Users,
-  Puppies,
-  Kittens,
+  User,
+  Puppy,
+  Kitten,
 };
