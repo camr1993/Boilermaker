@@ -19,7 +19,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     // making '.salt' act like a func hides it when serializing to JSON. This is a hack to get around Sequelize's lack of 'private' option. Can read the hashed/salted password, but not actually stored in database
     get() {
-      return () => this.getDataValue('password');
+      return () => this.getDataValue('salt');
     },
   },
   googleId: {
@@ -29,7 +29,9 @@ const User = db.define('user', {
 
 // Instance Methods -------------------------------------
 User.prototype.correctPassword = function (candidatePassword) {
-  return User.encryptPassword(candidatePassword, this.salt()) === this.password;
+  return (
+    User.encryptPassword(candidatePassword, this.salt()) === this.password()
+  );
 };
 
 // Class Methods ----------------------------------------

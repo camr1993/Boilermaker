@@ -9,12 +9,13 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store); // l
 const sessionStore = new SequelizeStore({ db: db }); // connect to database
 const passport = require('passport'); // Supports authentication using a username and password, or signing in with 3rd party. Attaches logged-in users info to req.user
 const { yellow } = require('chalk');
+const { User } = require('./db');
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id)); // serializing a logged in user into the session data (storing an identifying piece of info as a STRING). Aka keeping track of a logged in users' ID so we can keep track of their session (logged in/logged out)
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await db.models.user.findById(id);
+    const user = await User.findByPk(id);
     done(null, user);
   } catch (err) {
     done(err);

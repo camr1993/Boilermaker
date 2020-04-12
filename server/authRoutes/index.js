@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../db');
+const { User } = require('../db');
 
 router.put('/login', async (req, res, next) => {
   try {
@@ -13,7 +13,7 @@ router.put('/login', async (req, res, next) => {
       res.status(401).send('User not found.');
     }
     // instance method we defined in the model
-    else if (user.correctPassword(req.body.password)) {
+    else if (!user.correctPassword(req.body.password)) {
       res.status(401).send('Incorrect password');
     } else {
       // passport gives us req.login. This is a way to manually set req.user to sync up with session
@@ -40,7 +40,7 @@ router.delete('/logout', (req, res, next) => {
   // passport method that removes the user from the session and deletes req.user
   req.logout();
   req.session.destroy();
-  res.redirect('/');
+  res.sendStatus(204);
 });
 
 router.get('/me', (req, res, next) => {
