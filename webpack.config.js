@@ -1,7 +1,10 @@
 // **** If you make changes to webpack, you need to kill the process on the terminal and run npm start again! ****
 
 module.exports = {
-  entry: './client/index.js', // where webpack will start bundling files from (highest level of client side)
+  entry: [
+    '@babel/polyfill', //enables async-await
+    './client/index.js', // where webpack will start bundling files from (highest level of client side)
+  ],
   mode: 'development',
   output: {
     // where webpack will put bundle.js when it finished

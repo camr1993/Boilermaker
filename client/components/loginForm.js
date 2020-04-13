@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loginThunk } from '../redux/reducer';
 
-export class loginForm extends Component {
+class DisconnectedLoginForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,15 +17,14 @@ export class loginForm extends Component {
       [event.target.name]: event.target.value,
     });
   }
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    console.log(event.target);
-    console.log(event.target.value);
-    // THUNK HERE!
+    await this.props.login(this.state);
     this.setState({
       email: '',
       password: '',
     });
+    this.props.history.push('/user');
   }
   render() {
     return (
@@ -49,3 +50,14 @@ export class loginForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (obj) => dispatch(loginThunk(obj)),
+  };
+};
+
+export const LoginForm = connect(
+  null,
+  mapDispatchToProps
+)(DisconnectedLoginForm);

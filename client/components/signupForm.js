@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { signupThunk } from '../redux/reducer';
 
-export class signupForm extends Component {
+class DisconnectedSignupForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,15 +17,14 @@ export class signupForm extends Component {
       [event.target.name]: event.target.value,
     });
   }
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    console.log(event.target);
-    console.log(event.target.value);
-    // THUNK HERE!
+    await this.props.signup(this.state);
     this.setState({
       email: '',
       password: '',
     });
+    this.props.history.push('/user');
   }
   render() {
     return (
@@ -49,3 +50,14 @@ export class signupForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signup: (obj) => dispatch(signupThunk(obj)),
+  };
+};
+
+export const SignupForm = connect(
+  null,
+  mapDispatchToProps
+)(DisconnectedSignupForm);
