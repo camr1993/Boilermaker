@@ -25,13 +25,13 @@ class DisconnectedSignupForm extends Component {
       password: '',
     });
     // basically an easier way of doing an onClick or Link
-    this.props.history.push('/user');
+    this.props.history.push('/userhome');
   }
   render() {
     return (
       <div>
-        <div>Sign Up: </div>
-        <form onSubmit={this.handleSubmit}>
+        <h2>SIGN UP: </h2>
+        <form onSubmit={this.handleSubmit} className="form-container">
           <label htmlFor="email">Email: </label>
           <input
             type="email"

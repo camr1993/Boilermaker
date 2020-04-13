@@ -1,15 +1,21 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { logoutThunk } from '../redux/reducer';
 
 const DisconnectedUserPage = (props) => {
   return (
-    <div>
-      <div>User Page</div>
-      <div>{props.user.email}</div>
-      <button onClick={props.logout}>Logout</button>
+    <div className="container-1">
+      <h2>User Home Page</h2>
+      <div>Email: {props.user.email}</div>
+      <button
+        onClick={() => {
+          props.logout();
+          props.history.push('/login');
+        }}
+      >
+        Logout
+      </button>
     </div>
   );
 };

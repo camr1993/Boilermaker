@@ -26,7 +26,9 @@ class DisconnectedRoot extends Component {
           <Route path="/login" component={LoginForm} />
           <Route path="/signup" component={SignupForm} />
           {/* The /user Route will only exist if we have a logged in user */}
-          {this.props.isLoggedIn && <Route path="/user" component={UserPage} />}
+          {this.props.isLoggedIn && (
+            <Route path="/userhome" component={UserPage} />
+          )}
           {/* Displays Login or UserPage Component as a fallback depending if logged in. This is made possible due to Switch */}
           {this.props.isLoggedIn ? (
             <Route component={UserPage} />

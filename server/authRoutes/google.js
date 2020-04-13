@@ -12,7 +12,7 @@ router.get('/', passport.authenticate('google', { scope: 'email' }));
 router.get(
   '/callback',
   passport.authenticate('google', {
-    successRedirect: '/home', // CHECK THESE REDIRECTS
+    successRedirect: '/userhome', // CHECK THESE REDIRECTS
     failureRedirect: '/login',
   })
 );
