@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signupThunk } from '../redux/reducer';
+import { OauthLoginForm } from './oauthLoginForm';
 
 class DisconnectedSignupForm extends Component {
   constructor() {
@@ -50,6 +51,7 @@ class DisconnectedSignupForm extends Component {
           />
           <button type="submit">Submit</button>
         </form>
+        <OauthLoginForm />
       </div>
     );
   }
