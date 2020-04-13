@@ -45,7 +45,11 @@ router.delete('/logout', (req, res, next) => {
 
 router.get('/me', (req, res, next) => {
   // passport gives us req.user until it is logged out, so we can use this on the front end to keep track of any logged in users
-  res.json(req.user);
+  if (!req.user) {
+    res.json({});
+  } else {
+    res.json(req.user);
+  }
 });
 
 router.use('/google', require('./google'));

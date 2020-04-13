@@ -2,13 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { logoutThunk } from '../redux/reducer';
 
 const DisconnectedUserPage = (props) => {
-  // if no user logged in and they try to go to '/user', they will be redirected to '/'
-  if (!props.user.id) {
-    return <Redirect to="/" />;
-  }
-
   return (
     <div>
       <div>User Page</div>
@@ -26,7 +22,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logout: () => console.log('logout'),
+    logout: () => dispatch(logoutThunk()),
   };
 };
 

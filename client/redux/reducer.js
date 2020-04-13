@@ -3,6 +3,8 @@ import axios from 'axios';
 // action types
 const LOGIN = 'LOGIN';
 const SIGNUP = 'SIGNUP';
+const LOGOUT = 'LOGOUT';
+const CHECK_FOR_USER = 'CHECK_FOR_USER';
 
 // action creators/thunks
 const login = (userObj) => ({
@@ -37,6 +39,37 @@ export const signupThunk = (userObj) => {
   };
 };
 
+const logout = () => ({
+  type: LOGOUT,
+});
+
+export const logoutThunk = () => {
+  return async (dispatch) => {
+    try {
+      await axios.delete('/auth/logout');
+      dispatch(logout());
+    } catch (error) {
+      console.log('Logout Error: ', error);
+    }
+  };
+};
+
+const checkForUser = (userObj) => ({
+  type: CHECK_FOR_USER,
+  userObj,
+});
+
+export const checkForUserThunk = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get('/auth/me');
+      dispatch(checkForUser(data));
+    } catch (error) {
+      console.log('User Check Error: ', error);
+    }
+  };
+};
+
 // initial state
 const initialState = {
   user: {},
@@ -51,6 +84,13 @@ export const reducer = (state = initialState, action) => {
         user: action.userObj,
       };
     case SIGNUP:
+      return {
+        ...state,
+        user: action.userObj,
+      };
+    case LOGOUT:
+      return initialState;
+    case CHECK_FOR_USER:
       return {
         ...state,
         user: action.userObj,
