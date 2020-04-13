@@ -11,6 +11,12 @@ const passport = require('passport'); // Supports authentication using a usernam
 const { yellow } = require('chalk');
 const { User } = require('./db');
 
+// require local secrets so the localSecrets.js file runs and sets your env vars
+// if statement will only run this for 'development' (which needs to be set on your local machine), or else this would get an error when we deploy. On the deployment server, we can set these separately
+if (process.env.NODE_ENV === 'development') {
+  require('../localSecrets');
+}
+
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id)); // serializing a logged in user into the session data (storing an identifying piece of info as a STRING). Aka keeping track of a logged in users' ID so we can keep track of their session (logged in/logged out)
 passport.deserializeUser(async (id, done) => {
