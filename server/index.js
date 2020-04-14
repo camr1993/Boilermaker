@@ -58,11 +58,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // serving up all of our static files at once (bundle.js, css, images, html)
-app.use(express.static(path.join(__dirname, '../public')));
+// app.use(express.static(path.join(__dirname, '../public')));
 
 // Sending all requests to /api to the /apiRoutes folder (will go to index.js because of "main" in package.json)
 app.use('/api', require('./apiRoutes'));
 app.use('/auth', require('./authRoutes'));
+
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Serve up index.html for any get requests that aren't for any other routes (like api)
 // Goes at the end! Only thing after is the error handler to serve up 500's. 404s go before this as well FYI
