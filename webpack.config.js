@@ -4,11 +4,11 @@
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
+  mode: isDev ? 'development' : 'production',
   entry: [
     '@babel/polyfill', //enables async-await
     './client/index.js', // where webpack will start bundling files from (highest level of client side)
   ],
-  mode: isDev ? 'development' : 'production',
   output: {
     // where webpack will put bundle.js when it finished
     path: __dirname,
