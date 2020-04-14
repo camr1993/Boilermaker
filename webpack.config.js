@@ -14,6 +14,9 @@ module.exports = {
     path: __dirname,
     filename: './public/bundle.js',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   devtool: 'source-maps', // displays original js when debugging (I think sometimes we call this bundle.map.js),
   module: {
     rules: [
