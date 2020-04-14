@@ -30,7 +30,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   const googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/auth/google/callback',
+    callbackURL: process.env.GOOGLE_CALLBACK,
   };
 
   // configure the strategy with our config object, and write the function that passport will invoke after google sends us the user's profile and access token
