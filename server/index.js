@@ -11,9 +11,15 @@ const passport = require('passport'); // Supports authentication using a usernam
 const { yellow } = require('chalk');
 const { User } = require('./db');
 
+// This is a global Mocha hook, used for resource cleanup.
+// Otherwise, Mocha v4+ never quits after tests.
+if (process.env.NODE_ENV === 'test') {
+  after('close the session store', () => sessionStore.stopExpiringSessions());
+}
+
 // require local secrets so the localSecrets.js file runs and sets your env vars
-// if statement will only run this for 'development' (which needs to be set on your local machine), or else this would get an error when we deploy. On the deployment server, we can set these separately
-if (process.env.NODE_ENV === 'development') {
+// if statement will only run this for 'development' (which is set in package.json), which means it won't run when we deploy. On the deployment server, we can set these separately
+if (process.env.NODE_ENV !== 'production') {
   require('../localSecrets');
 }
 
