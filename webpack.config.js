@@ -4,7 +4,7 @@
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  // mode: isDev ? 'development' : 'production',
+  mode: isDev ? 'development' : 'production',
   entry: [
     '@babel/polyfill', //enables async-await
     './client/index.js', // where webpack will start bundling files from (highest level of client side)
@@ -22,7 +22,7 @@ module.exports = {
     rules: [
       // rules/processing pipelines during bundling process
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader', // 'converts code written in modern flavors and supersets of JS into plain old JS code' - like JSX
