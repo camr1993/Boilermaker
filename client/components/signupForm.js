@@ -10,6 +10,7 @@ class DisconnectedSignupForm extends Component {
       email: '',
       password: '',
     };
+    this.attempted = false;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -25,13 +26,23 @@ class DisconnectedSignupForm extends Component {
       email: '',
       password: '',
     });
+    // this.props.history.push('/userhome');
     // basically an easier way of doing an onClick or Link
-    this.props.history.push('/userhome');
+    if (this.props.user.id) {
+      this.attempted = false;
+      this.props.history.push('/userhome');
+    } else {
+      this.attempted = true;
+      this.props.history.push('/signup');
+    }
   }
   render() {
     return (
       <div>
         <h2>SIGN UP: </h2>
+        {this.attempted && (
+          <div className="error-message">Username is taken!</div>
+        )}
         <form onSubmit={this.handleSubmit} className="form-container">
           <label htmlFor="email">Email: </label>
           <input
@@ -57,6 +68,12 @@ class DisconnectedSignupForm extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     signup: (obj) => dispatch(signupThunk(obj)),
@@ -64,6 +81,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export const SignupForm = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(DisconnectedSignupForm);
