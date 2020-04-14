@@ -17,16 +17,14 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devtool: 'source-maps', // displays original js when debugging (I think sometimes we call this bundle.map.js),
+  devtool: 'source-map', // displays original js when debugging (I think sometimes we call this bundle.map.js),
   module: {
     rules: [
       // rules/processing pipelines during bundling process
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader', // 'converts code written in modern flavors and supersets of JS into plain old JS code' - like JSX
-        },
+        loader: 'babel-loader', // 'converts code written in modern flavors and supersets of JS into plain old JS code' - like JSX
       },
       {
         // use the style-loader/css-loader combos for anything matching the .css extension. This basically allows us to use multiple css files and webpack will combine it into one css file
