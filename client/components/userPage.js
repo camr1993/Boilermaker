@@ -6,7 +6,7 @@ import { logoutThunk } from '../redux/reducer';
 const DisconnectedUserPage = (props) => {
   return (
     <div className="container-1">
-      <h2>User Home Page</h2>
+      <h2>You Are Logged In!</h2>
       <div>Email: {props.user.email}</div>
       <button
         onClick={() => {
