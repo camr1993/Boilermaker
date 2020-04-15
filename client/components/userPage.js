@@ -11,7 +11,6 @@ const DisconnectedUserPage = (props) => {
       <button
         onClick={() => {
           props.logout();
-          props.history.push('/login');
         }}
       >
         Logout

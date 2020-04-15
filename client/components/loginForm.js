@@ -10,7 +10,6 @@ class DisconnectedLoginForm extends Component {
       email: '',
       password: '',
     };
-    this.attempted = false;
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -26,8 +25,6 @@ class DisconnectedLoginForm extends Component {
       email: '',
       password: '',
     });
-    // basically an easier way of doing an onClick or Link
-    this.props.history.push('/userhome');
   }
   render() {
     return (

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from '../history';
 
 // action types
 const LOGIN = 'LOGIN';
@@ -17,6 +18,7 @@ export const loginThunk = (userObj) => {
     try {
       const { data } = await axios.put('/auth/login', userObj);
       dispatch(login(data));
+      history.push('/userhome');
     } catch (error) {
       console.log('Login Error');
       dispatch(login({ error: error }));
@@ -34,6 +36,7 @@ export const signupThunk = (userObj) => {
     try {
       const { data } = await axios.post('/auth/signup', userObj);
       dispatch(signup(data));
+      history.push('/userhome');
     } catch (error) {
       console.log('Signup Error: ', error);
     }
@@ -49,6 +52,7 @@ export const logoutThunk = () => {
     try {
       await axios.delete('/auth/logout');
       dispatch(logout());
+      history.push('/login');
     } catch (error) {
       console.log('Logout Error: ', error);
     }

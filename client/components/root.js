@@ -13,8 +13,9 @@ class DisconnectedRoot extends Component {
   }
 
   render() {
+    console.log('IS LOGGED IN', this.props.isLoggedIn);
     return (
-      <Router>
+      <div>
         <nav>
           Welcome!
           <div>
@@ -36,7 +37,7 @@ class DisconnectedRoot extends Component {
             <Route component={LoginForm} />
           )}
         </Switch>
-      </Router>
+      </div>
     );
   }
 }

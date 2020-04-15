@@ -26,15 +26,6 @@ class DisconnectedSignupForm extends Component {
       email: '',
       password: '',
     });
-    // this.props.history.push('/userhome');
-    // basically an easier way of doing an onClick or Link
-    if (this.props.user.id) {
-      this.attempted = false;
-      this.props.history.push('/userhome');
-    } else {
-      this.attempted = true;
-      this.props.history.push('/signup');
-    }
   }
   render() {
     return (
