@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'test') {
 
 // require local secrets so the localSecrets.js file runs and sets your env vars
 // if statement will only run this for 'development' (which is set in package.json), which means it won't run when we deploy. On the deployment server, we can set these separately
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   require('../localSecrets');
 }
 
