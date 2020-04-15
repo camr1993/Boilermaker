@@ -27,20 +27,13 @@ class DisconnectedLoginForm extends Component {
       password: '',
     });
     // basically an easier way of doing an onClick or Link
-    if (this.props.user.id) {
-      this.attempted = false;
-      this.props.history.push('/userhome');
-    } else {
-      this.attempted = true;
-      this.props.history.push('/login');
-    }
+    this.props.history.push('/userhome');
   }
   render() {
-    console.log(this.attempted);
     return (
       <div>
         <h2>LOGIN: </h2>
-        {this.attempted && (
+        {this.props.error && (
           <div className="error-message">
             Username or password is incorrect!
           </div>
@@ -72,7 +65,7 @@ class DisconnectedLoginForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    error: state.user.error,
   };
 };
 

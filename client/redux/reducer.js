@@ -18,7 +18,8 @@ export const loginThunk = (userObj) => {
       const { data } = await axios.put('/auth/login', userObj);
       dispatch(login(data));
     } catch (error) {
-      console.log('Login Error: ', error);
+      console.log('Login Error');
+      dispatch(login({ error: error }));
     }
   };
 };
@@ -54,7 +55,7 @@ export const logoutThunk = () => {
   };
 };
 
-const checkForUser = (userObj) => ({
+export const checkForUser = (userObj) => ({
   type: CHECK_FOR_USER,
   userObj,
 });
